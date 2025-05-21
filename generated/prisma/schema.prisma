@@ -1,0 +1,54 @@
+// This is your Prisma schema file,
+// learn more about it in the docs: https://pris.ly/d/prisma-schema
+
+// Looking for ways to speed up your queries, or scale easily with your serverless or edge functions?
+// Try Prisma Accelerate: https://pris.ly/cli/accelerate-init
+
+generator client {
+  provider = "prisma-client-js"
+  output   = "../generated/prisma"
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+model User {
+  id               String          @id @default(uuid())
+  createdAt        DateTime        @default(now())
+  name             String
+  email            String
+  password         String
+  contacts         User[]          @relation("UserContacts")
+  inContacts       User[]          @relation("UserContacts")
+  messagesSent     Message[]       @relation("MessagesSent")
+  messagesReceived Message[]       @relation("MessagesReceived")
+  requestsSend     FriendRequest[] @relation("requestsSend")
+  requestsReceived FriendRequest[] @relation("requestsReceived")
+
+  @@map("users")
+}
+
+model Message {
+  id         String   @id @default(uuid())
+  sendAt     DateTime @default(now())
+  content    String
+  sender     User     @relation("MessagesSent", fields: [senderId], references: [id])
+  senderId   String
+  receiver   User     @relation("MessagesReceived", fields: [receiverId], references: [id])
+  receiverId String
+
+  @@map("messages")
+}
+
+model FriendRequest {
+  id         String @id @default(uuid())
+  sender     User   @relation("requestsSend", fields: [senderId], references: [id])
+  senderId   String
+  receiver   User   @relation("requestsReceived", fields: [receiverId], references: [id])
+  receiverId String
+  state      String //pending, accepted, denied
+
+  @@map("friendrequests")
+}
