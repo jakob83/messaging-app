@@ -18,7 +18,7 @@ model User{
   id                String           @id @default(uuid())
   createdAt         DateTime         @default(now())
   name              String
-  email             String
+  email             String           @unique
   password          String
   contacts          User[]            @relation("UserContacts")
   inContacts        User[]            @relation("UserContacts")
