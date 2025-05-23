@@ -52,7 +52,7 @@ userRouter.get('/', async (req, res) => {
 });
 
 userRouter.post(
-  '/userId/requests',
+  '/:userId/requests',
   passport.authenticate('jwt', { session: false }),
   async (req, res) => {
     const { userId } = req.params;
@@ -76,7 +76,7 @@ userRouter.post(
 );
 
 userRouter.get(
-  '/userId/requests',
+  '/:userId/requests',
   passport.authenticate('jwt', { session: false }),
   async (req, res) => {
     const { userId } = req.params;
@@ -89,6 +89,61 @@ userRouter.get(
       res.json(request);
     } catch (error) {
       res.status(500).json({ error: 'Internal Server Error' });
+    }
+  }
+);
+
+async function makeFriends(receiverId, senderId) {
+  try {
+    // Add sender to receiver's contacts
+    await prisma.user.update({
+      where: { id: receiverId },
+      data: {
+        contacts: {
+          connect: {
+            id: senderId,
+          },
+        },
+      },
+    });
+
+    // Add receiver to sender's contacts
+    await prisma.user.update({
+      where: { id: senderId },
+      data: {
+        contacts: {
+          connect: { id: receiverId },
+        },
+      },
+    });
+  } catch (error) {
+    throw new Error('Failed to create contacts');
+  }
+}
+userRouter.put(
+  '/:userId/requests/:requestId',
+  passport.authenticate('jwt', { session: false }),
+  async (req, res) => {
+    const { userId, requestId } = req.params;
+    const user = req.user;
+    if (user.id !== userId) {
+      return res.status(403).json({ error: 'cannot access this data' });
+    }
+    const { status } = req.body;
+    try {
+      const updatedReq = await prisma.friendRequest.update({
+        where: {
+          receiverId: userId,
+        },
+        data: {
+          state: status,
+        },
+      });
+      if (updatedReq.state === 'accepted') {
+        await makeFriends(userId, updatedReq.senderId);
+      }
+    } catch (error) {
+      return res.json({ error: 'Internal Server Error' });
     }
   }
 );
