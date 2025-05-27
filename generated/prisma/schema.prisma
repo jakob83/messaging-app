@@ -26,6 +26,7 @@ model User {
   messagesReceived Message[]       @relation("MessagesReceived")
   requestsSend     FriendRequest[] @relation("requestsSend")
   requestsReceived FriendRequest[] @relation("requestsReceived")
+  ppic             String          @default("no-pp.webp")
 
   @@map("users")
 }
@@ -50,5 +51,6 @@ model FriendRequest {
   receiverId String
   state      String //pending, accepted, denied
 
+  @@unique([receiverId, senderId, state]) // Compound unique constraint
   @@map("friendrequests")
 }

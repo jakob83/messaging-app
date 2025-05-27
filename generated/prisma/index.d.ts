@@ -1142,6 +1142,7 @@ export namespace Prisma {
     name: string | null
     email: string | null
     password: string | null
+    ppic: string | null
   }
 
   export type UserMaxAggregateOutputType = {
@@ -1150,6 +1151,7 @@ export namespace Prisma {
     name: string | null
     email: string | null
     password: string | null
+    ppic: string | null
   }
 
   export type UserCountAggregateOutputType = {
@@ -1158,6 +1160,7 @@ export namespace Prisma {
     name: number
     email: number
     password: number
+    ppic: number
     _all: number
   }
 
@@ -1168,6 +1171,7 @@ export namespace Prisma {
     name?: true
     email?: true
     password?: true
+    ppic?: true
   }
 
   export type UserMaxAggregateInputType = {
@@ -1176,6 +1180,7 @@ export namespace Prisma {
     name?: true
     email?: true
     password?: true
+    ppic?: true
   }
 
   export type UserCountAggregateInputType = {
@@ -1184,6 +1189,7 @@ export namespace Prisma {
     name?: true
     email?: true
     password?: true
+    ppic?: true
     _all?: true
   }
 
@@ -1265,6 +1271,7 @@ export namespace Prisma {
     name: string
     email: string
     password: string
+    ppic: string
     _count: UserCountAggregateOutputType | null
     _min: UserMinAggregateOutputType | null
     _max: UserMaxAggregateOutputType | null
@@ -1290,6 +1297,7 @@ export namespace Prisma {
     name?: boolean
     email?: boolean
     password?: boolean
+    ppic?: boolean
     contacts?: boolean | User$contactsArgs<ExtArgs>
     inContacts?: boolean | User$inContactsArgs<ExtArgs>
     messagesSent?: boolean | User$messagesSentArgs<ExtArgs>
@@ -1305,6 +1313,7 @@ export namespace Prisma {
     name?: boolean
     email?: boolean
     password?: boolean
+    ppic?: boolean
   }, ExtArgs["result"]["user"]>
 
   export type UserSelectUpdateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
@@ -1313,6 +1322,7 @@ export namespace Prisma {
     name?: boolean
     email?: boolean
     password?: boolean
+    ppic?: boolean
   }, ExtArgs["result"]["user"]>
 
   export type UserSelectScalar = {
@@ -1321,9 +1331,10 @@ export namespace Prisma {
     name?: boolean
     email?: boolean
     password?: boolean
+    ppic?: boolean
   }
 
-  export type UserOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "createdAt" | "name" | "email" | "password", ExtArgs["result"]["user"]>
+  export type UserOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "createdAt" | "name" | "email" | "password" | "ppic", ExtArgs["result"]["user"]>
   export type UserInclude<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     contacts?: boolean | User$contactsArgs<ExtArgs>
     inContacts?: boolean | User$inContactsArgs<ExtArgs>
@@ -1352,6 +1363,7 @@ export namespace Prisma {
       name: string
       email: string
       password: string
+      ppic: string
     }, ExtArgs["result"]["user"]>
     composites: {}
   }
@@ -1786,6 +1798,7 @@ export namespace Prisma {
     readonly name: FieldRef<"User", 'String'>
     readonly email: FieldRef<"User", 'String'>
     readonly password: FieldRef<"User", 'String'>
+    readonly ppic: FieldRef<"User", 'String'>
   }
     
 
@@ -4474,7 +4487,8 @@ export namespace Prisma {
     createdAt: 'createdAt',
     name: 'name',
     email: 'email',
-    password: 'password'
+    password: 'password',
+    ppic: 'ppic'
   };
 
   export type UserScalarFieldEnum = (typeof UserScalarFieldEnum)[keyof typeof UserScalarFieldEnum]
@@ -4576,6 +4590,7 @@ export namespace Prisma {
     name?: StringFilter<"User"> | string
     email?: StringFilter<"User"> | string
     password?: StringFilter<"User"> | string
+    ppic?: StringFilter<"User"> | string
     contacts?: UserListRelationFilter
     inContacts?: UserListRelationFilter
     messagesSent?: MessageListRelationFilter
@@ -4590,6 +4605,7 @@ export namespace Prisma {
     name?: SortOrder
     email?: SortOrder
     password?: SortOrder
+    ppic?: SortOrder
     contacts?: UserOrderByRelationAggregateInput
     inContacts?: UserOrderByRelationAggregateInput
     messagesSent?: MessageOrderByRelationAggregateInput
@@ -4607,6 +4623,7 @@ export namespace Prisma {
     createdAt?: DateTimeFilter<"User"> | Date | string
     name?: StringFilter<"User"> | string
     password?: StringFilter<"User"> | string
+    ppic?: StringFilter<"User"> | string
     contacts?: UserListRelationFilter
     inContacts?: UserListRelationFilter
     messagesSent?: MessageListRelationFilter
@@ -4621,6 +4638,7 @@ export namespace Prisma {
     name?: SortOrder
     email?: SortOrder
     password?: SortOrder
+    ppic?: SortOrder
     _count?: UserCountOrderByAggregateInput
     _max?: UserMaxOrderByAggregateInput
     _min?: UserMinOrderByAggregateInput
@@ -4635,6 +4653,7 @@ export namespace Prisma {
     name?: StringWithAggregatesFilter<"User"> | string
     email?: StringWithAggregatesFilter<"User"> | string
     password?: StringWithAggregatesFilter<"User"> | string
+    ppic?: StringWithAggregatesFilter<"User"> | string
   }
 
   export type MessageWhereInput = {
@@ -4718,6 +4737,7 @@ export namespace Prisma {
 
   export type FriendRequestWhereUniqueInput = Prisma.AtLeast<{
     id?: string
+    receiverId_senderId_state?: FriendRequestReceiverIdSenderIdStateCompoundUniqueInput
     AND?: FriendRequestWhereInput | FriendRequestWhereInput[]
     OR?: FriendRequestWhereInput[]
     NOT?: FriendRequestWhereInput | FriendRequestWhereInput[]
@@ -4726,7 +4746,7 @@ export namespace Prisma {
     state?: StringFilter<"FriendRequest"> | string
     sender?: XOR<UserScalarRelationFilter, UserWhereInput>
     receiver?: XOR<UserScalarRelationFilter, UserWhereInput>
-  }, "id">
+  }, "id" | "receiverId_senderId_state">
 
   export type FriendRequestOrderByWithAggregationInput = {
     id?: SortOrder
@@ -4754,6 +4774,7 @@ export namespace Prisma {
     name: string
     email: string
     password: string
+    ppic?: string
     contacts?: UserCreateNestedManyWithoutInContactsInput
     inContacts?: UserCreateNestedManyWithoutContactsInput
     messagesSent?: MessageCreateNestedManyWithoutSenderInput
@@ -4768,6 +4789,7 @@ export namespace Prisma {
     name: string
     email: string
     password: string
+    ppic?: string
     contacts?: UserUncheckedCreateNestedManyWithoutInContactsInput
     inContacts?: UserUncheckedCreateNestedManyWithoutContactsInput
     messagesSent?: MessageUncheckedCreateNestedManyWithoutSenderInput
@@ -4782,6 +4804,7 @@ export namespace Prisma {
     name?: StringFieldUpdateOperationsInput | string
     email?: StringFieldUpdateOperationsInput | string
     password?: StringFieldUpdateOperationsInput | string
+    ppic?: StringFieldUpdateOperationsInput | string
     contacts?: UserUpdateManyWithoutInContactsNestedInput
     inContacts?: UserUpdateManyWithoutContactsNestedInput
     messagesSent?: MessageUpdateManyWithoutSenderNestedInput
@@ -4796,6 +4819,7 @@ export namespace Prisma {
     name?: StringFieldUpdateOperationsInput | string
     email?: StringFieldUpdateOperationsInput | string
     password?: StringFieldUpdateOperationsInput | string
+    ppic?: StringFieldUpdateOperationsInput | string
     contacts?: UserUncheckedUpdateManyWithoutInContactsNestedInput
     inContacts?: UserUncheckedUpdateManyWithoutContactsNestedInput
     messagesSent?: MessageUncheckedUpdateManyWithoutSenderNestedInput
@@ -4810,6 +4834,7 @@ export namespace Prisma {
     name: string
     email: string
     password: string
+    ppic?: string
   }
 
   export type UserUpdateManyMutationInput = {
@@ -4818,6 +4843,7 @@ export namespace Prisma {
     name?: StringFieldUpdateOperationsInput | string
     email?: StringFieldUpdateOperationsInput | string
     password?: StringFieldUpdateOperationsInput | string
+    ppic?: StringFieldUpdateOperationsInput | string
   }
 
   export type UserUncheckedUpdateManyInput = {
@@ -4826,6 +4852,7 @@ export namespace Prisma {
     name?: StringFieldUpdateOperationsInput | string
     email?: StringFieldUpdateOperationsInput | string
     password?: StringFieldUpdateOperationsInput | string
+    ppic?: StringFieldUpdateOperationsInput | string
   }
 
   export type MessageCreateInput = {
@@ -4991,6 +5018,7 @@ export namespace Prisma {
     name?: SortOrder
     email?: SortOrder
     password?: SortOrder
+    ppic?: SortOrder
   }
 
   export type UserMaxOrderByAggregateInput = {
@@ -4999,6 +5027,7 @@ export namespace Prisma {
     name?: SortOrder
     email?: SortOrder
     password?: SortOrder
+    ppic?: SortOrder
   }
 
   export type UserMinOrderByAggregateInput = {
@@ -5007,6 +5036,7 @@ export namespace Prisma {
     name?: SortOrder
     email?: SortOrder
     password?: SortOrder
+    ppic?: SortOrder
   }
 
   export type StringWithAggregatesFilter<$PrismaModel = never> = {
@@ -5068,6 +5098,12 @@ export namespace Prisma {
     content?: SortOrder
     senderId?: SortOrder
     receiverId?: SortOrder
+  }
+
+  export type FriendRequestReceiverIdSenderIdStateCompoundUniqueInput = {
+    receiverId: string
+    senderId: string
+    state: string
   }
 
   export type FriendRequestCountOrderByAggregateInput = {
@@ -5472,6 +5508,7 @@ export namespace Prisma {
     name: string
     email: string
     password: string
+    ppic?: string
     contacts?: UserCreateNestedManyWithoutInContactsInput
     messagesSent?: MessageCreateNestedManyWithoutSenderInput
     messagesReceived?: MessageCreateNestedManyWithoutReceiverInput
@@ -5485,6 +5522,7 @@ export namespace Prisma {
     name: string
     email: string
     password: string
+    ppic?: string
     contacts?: UserUncheckedCreateNestedManyWithoutInContactsInput
     messagesSent?: MessageUncheckedCreateNestedManyWithoutSenderInput
     messagesReceived?: MessageUncheckedCreateNestedManyWithoutReceiverInput
@@ -5503,6 +5541,7 @@ export namespace Prisma {
     name: string
     email: string
     password: string
+    ppic?: string
     inContacts?: UserCreateNestedManyWithoutContactsInput
     messagesSent?: MessageCreateNestedManyWithoutSenderInput
     messagesReceived?: MessageCreateNestedManyWithoutReceiverInput
@@ -5516,6 +5555,7 @@ export namespace Prisma {
     name: string
     email: string
     password: string
+    ppic?: string
     inContacts?: UserUncheckedCreateNestedManyWithoutContactsInput
     messagesSent?: MessageUncheckedCreateNestedManyWithoutSenderInput
     messagesReceived?: MessageUncheckedCreateNestedManyWithoutReceiverInput
@@ -5645,6 +5685,7 @@ export namespace Prisma {
     name?: StringFilter<"User"> | string
     email?: StringFilter<"User"> | string
     password?: StringFilter<"User"> | string
+    ppic?: StringFilter<"User"> | string
   }
 
   export type UserUpsertWithWhereUniqueWithoutContactsInput = {
@@ -5754,6 +5795,7 @@ export namespace Prisma {
     name: string
     email: string
     password: string
+    ppic?: string
     contacts?: UserCreateNestedManyWithoutInContactsInput
     inContacts?: UserCreateNestedManyWithoutContactsInput
     messagesReceived?: MessageCreateNestedManyWithoutReceiverInput
@@ -5767,6 +5809,7 @@ export namespace Prisma {
     name: string
     email: string
     password: string
+    ppic?: string
     contacts?: UserUncheckedCreateNestedManyWithoutInContactsInput
     inContacts?: UserUncheckedCreateNestedManyWithoutContactsInput
     messagesReceived?: MessageUncheckedCreateNestedManyWithoutReceiverInput
@@ -5785,6 +5828,7 @@ export namespace Prisma {
     name: string
     email: string
     password: string
+    ppic?: string
     contacts?: UserCreateNestedManyWithoutInContactsInput
     inContacts?: UserCreateNestedManyWithoutContactsInput
     messagesSent?: MessageCreateNestedManyWithoutSenderInput
@@ -5798,6 +5842,7 @@ export namespace Prisma {
     name: string
     email: string
     password: string
+    ppic?: string
     contacts?: UserUncheckedCreateNestedManyWithoutInContactsInput
     inContacts?: UserUncheckedCreateNestedManyWithoutContactsInput
     messagesSent?: MessageUncheckedCreateNestedManyWithoutSenderInput
@@ -5827,6 +5872,7 @@ export namespace Prisma {
     name?: StringFieldUpdateOperationsInput | string
     email?: StringFieldUpdateOperationsInput | string
     password?: StringFieldUpdateOperationsInput | string
+    ppic?: StringFieldUpdateOperationsInput | string
     contacts?: UserUpdateManyWithoutInContactsNestedInput
     inContacts?: UserUpdateManyWithoutContactsNestedInput
     messagesReceived?: MessageUpdateManyWithoutReceiverNestedInput
@@ -5840,6 +5886,7 @@ export namespace Prisma {
     name?: StringFieldUpdateOperationsInput | string
     email?: StringFieldUpdateOperationsInput | string
     password?: StringFieldUpdateOperationsInput | string
+    ppic?: StringFieldUpdateOperationsInput | string
     contacts?: UserUncheckedUpdateManyWithoutInContactsNestedInput
     inContacts?: UserUncheckedUpdateManyWithoutContactsNestedInput
     messagesReceived?: MessageUncheckedUpdateManyWithoutReceiverNestedInput
@@ -5864,6 +5911,7 @@ export namespace Prisma {
     name?: StringFieldUpdateOperationsInput | string
     email?: StringFieldUpdateOperationsInput | string
     password?: StringFieldUpdateOperationsInput | string
+    ppic?: StringFieldUpdateOperationsInput | string
     contacts?: UserUpdateManyWithoutInContactsNestedInput
     inContacts?: UserUpdateManyWithoutContactsNestedInput
     messagesSent?: MessageUpdateManyWithoutSenderNestedInput
@@ -5877,6 +5925,7 @@ export namespace Prisma {
     name?: StringFieldUpdateOperationsInput | string
     email?: StringFieldUpdateOperationsInput | string
     password?: StringFieldUpdateOperationsInput | string
+    ppic?: StringFieldUpdateOperationsInput | string
     contacts?: UserUncheckedUpdateManyWithoutInContactsNestedInput
     inContacts?: UserUncheckedUpdateManyWithoutContactsNestedInput
     messagesSent?: MessageUncheckedUpdateManyWithoutSenderNestedInput
@@ -5890,6 +5939,7 @@ export namespace Prisma {
     name: string
     email: string
     password: string
+    ppic?: string
     contacts?: UserCreateNestedManyWithoutInContactsInput
     inContacts?: UserCreateNestedManyWithoutContactsInput
     messagesSent?: MessageCreateNestedManyWithoutSenderInput
@@ -5903,6 +5953,7 @@ export namespace Prisma {
     name: string
     email: string
     password: string
+    ppic?: string
     contacts?: UserUncheckedCreateNestedManyWithoutInContactsInput
     inContacts?: UserUncheckedCreateNestedManyWithoutContactsInput
     messagesSent?: MessageUncheckedCreateNestedManyWithoutSenderInput
@@ -5921,6 +5972,7 @@ export namespace Prisma {
     name: string
     email: string
     password: string
+    ppic?: string
     contacts?: UserCreateNestedManyWithoutInContactsInput
     inContacts?: UserCreateNestedManyWithoutContactsInput
     messagesSent?: MessageCreateNestedManyWithoutSenderInput
@@ -5934,6 +5986,7 @@ export namespace Prisma {
     name: string
     email: string
     password: string
+    ppic?: string
     contacts?: UserUncheckedCreateNestedManyWithoutInContactsInput
     inContacts?: UserUncheckedCreateNestedManyWithoutContactsInput
     messagesSent?: MessageUncheckedCreateNestedManyWithoutSenderInput
@@ -5963,6 +6016,7 @@ export namespace Prisma {
     name?: StringFieldUpdateOperationsInput | string
     email?: StringFieldUpdateOperationsInput | string
     password?: StringFieldUpdateOperationsInput | string
+    ppic?: StringFieldUpdateOperationsInput | string
     contacts?: UserUpdateManyWithoutInContactsNestedInput
     inContacts?: UserUpdateManyWithoutContactsNestedInput
     messagesSent?: MessageUpdateManyWithoutSenderNestedInput
@@ -5976,6 +6030,7 @@ export namespace Prisma {
     name?: StringFieldUpdateOperationsInput | string
     email?: StringFieldUpdateOperationsInput | string
     password?: StringFieldUpdateOperationsInput | string
+    ppic?: StringFieldUpdateOperationsInput | string
     contacts?: UserUncheckedUpdateManyWithoutInContactsNestedInput
     inContacts?: UserUncheckedUpdateManyWithoutContactsNestedInput
     messagesSent?: MessageUncheckedUpdateManyWithoutSenderNestedInput
@@ -6000,6 +6055,7 @@ export namespace Prisma {
     name?: StringFieldUpdateOperationsInput | string
     email?: StringFieldUpdateOperationsInput | string
     password?: StringFieldUpdateOperationsInput | string
+    ppic?: StringFieldUpdateOperationsInput | string
     contacts?: UserUpdateManyWithoutInContactsNestedInput
     inContacts?: UserUpdateManyWithoutContactsNestedInput
     messagesSent?: MessageUpdateManyWithoutSenderNestedInput
@@ -6013,6 +6069,7 @@ export namespace Prisma {
     name?: StringFieldUpdateOperationsInput | string
     email?: StringFieldUpdateOperationsInput | string
     password?: StringFieldUpdateOperationsInput | string
+    ppic?: StringFieldUpdateOperationsInput | string
     contacts?: UserUncheckedUpdateManyWithoutInContactsNestedInput
     inContacts?: UserUncheckedUpdateManyWithoutContactsNestedInput
     messagesSent?: MessageUncheckedUpdateManyWithoutSenderNestedInput
@@ -6052,6 +6109,7 @@ export namespace Prisma {
     name?: StringFieldUpdateOperationsInput | string
     email?: StringFieldUpdateOperationsInput | string
     password?: StringFieldUpdateOperationsInput | string
+    ppic?: StringFieldUpdateOperationsInput | string
     contacts?: UserUpdateManyWithoutInContactsNestedInput
     messagesSent?: MessageUpdateManyWithoutSenderNestedInput
     messagesReceived?: MessageUpdateManyWithoutReceiverNestedInput
@@ -6065,6 +6123,7 @@ export namespace Prisma {
     name?: StringFieldUpdateOperationsInput | string
     email?: StringFieldUpdateOperationsInput | string
     password?: StringFieldUpdateOperationsInput | string
+    ppic?: StringFieldUpdateOperationsInput | string
     contacts?: UserUncheckedUpdateManyWithoutInContactsNestedInput
     messagesSent?: MessageUncheckedUpdateManyWithoutSenderNestedInput
     messagesReceived?: MessageUncheckedUpdateManyWithoutReceiverNestedInput
@@ -6078,6 +6137,7 @@ export namespace Prisma {
     name?: StringFieldUpdateOperationsInput | string
     email?: StringFieldUpdateOperationsInput | string
     password?: StringFieldUpdateOperationsInput | string
+    ppic?: StringFieldUpdateOperationsInput | string
   }
 
   export type UserUpdateWithoutContactsInput = {
@@ -6086,6 +6146,7 @@ export namespace Prisma {
     name?: StringFieldUpdateOperationsInput | string
     email?: StringFieldUpdateOperationsInput | string
     password?: StringFieldUpdateOperationsInput | string
+    ppic?: StringFieldUpdateOperationsInput | string
     inContacts?: UserUpdateManyWithoutContactsNestedInput
     messagesSent?: MessageUpdateManyWithoutSenderNestedInput
     messagesReceived?: MessageUpdateManyWithoutReceiverNestedInput
@@ -6099,6 +6160,7 @@ export namespace Prisma {
     name?: StringFieldUpdateOperationsInput | string
     email?: StringFieldUpdateOperationsInput | string
     password?: StringFieldUpdateOperationsInput | string
+    ppic?: StringFieldUpdateOperationsInput | string
     inContacts?: UserUncheckedUpdateManyWithoutContactsNestedInput
     messagesSent?: MessageUncheckedUpdateManyWithoutSenderNestedInput
     messagesReceived?: MessageUncheckedUpdateManyWithoutReceiverNestedInput
@@ -6112,6 +6174,7 @@ export namespace Prisma {
     name?: StringFieldUpdateOperationsInput | string
     email?: StringFieldUpdateOperationsInput | string
     password?: StringFieldUpdateOperationsInput | string
+    ppic?: StringFieldUpdateOperationsInput | string
   }
 
   export type MessageUpdateWithoutSenderInput = {

@@ -8,17 +8,56 @@ userMessagesRouter.get(
   passport.authenticate('jwt', { session: false }),
   async (req, res) => {
     const { userId } = req.params;
+    const { contactId } = req.query;
     const user = req.user;
     if (user.id !== userId) {
       return res.status(403).json({ error: 'cannot access this data' });
     }
     try {
-      const messages = await prisma.message.findMany({
+      const messagesSent = await prisma.message.findMany({
         where: {
-          OR: [{ senderId: userId }, { receiverId: userId }],
+          senderId: userId,
+          ...(contactId && { receiverId: contactId }),
+        },
+        include: {
+          receiver: {
+            select: {
+              name: true,
+              id: true,
+            },
+          },
+          sender: {
+            select: {
+              name: true,
+              id: true,
+            },
+          },
         },
       });
-      return res.json(messages);
+      const messagesReceived = await prisma.message.findMany({
+        where: {
+          receiverId: userId,
+          ...(contactId && { senderId: contactId }),
+        },
+        include: {
+          receiver: {
+            select: {
+              name: true,
+              id: true,
+            },
+          },
+          sender: {
+            select: {
+              name: true,
+              id: true,
+            },
+          },
+        },
+      });
+      return res.json({
+        sent: messagesSent,
+        received: messagesReceived,
+      });
     } catch (error) {
       return res.status(500).json({ error: 'Internal Server Error' });
     }
@@ -31,6 +70,7 @@ userMessagesRouter.post(
   async (req, res) => {
     const { userId } = req.params;
     const user = req.user;
+    console.log(user);
     const { receiverId, content } = req.body;
     if (user.id !== userId) {
       return res.status(403).json({ error: 'cannot access this data' });
