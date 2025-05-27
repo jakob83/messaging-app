@@ -204,17 +204,45 @@ userRouter.get(
                 where: {
                   senderId: userId,
                 },
+                include: {
+                  sender: {
+                    select: {
+                      name: true,
+                      id: true,
+                    },
+                  },
+                  receiver: {
+                    select: {
+                      name: true,
+                      id: true,
+                    },
+                  },
+                },
               },
               messagesSent: {
                 where: {
                   receiverId: userId,
+                },
+                include: {
+                  sender: {
+                    select: {
+                      name: true,
+                      id: true,
+                    },
+                  },
+                  receiver: {
+                    select: {
+                      name: true,
+                      id: true,
+                    },
+                  },
                 },
               },
             },
           },
         },
       });
-      res.json(contacts);
+      res.json(contacts.contacts);
     } catch (error) {
       return res.json({ error: 'Internal Server Error' });
     }
