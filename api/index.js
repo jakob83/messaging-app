@@ -16,7 +16,7 @@ app.use('/static', express.static(path.join(__dirname, 'public')));
 // passport setup with JWT
 require('./passport-config');
 
-const allowlist = process.env.CORS_ORIGIN.split(',');
+const allowlist = (process.env.CORS_ORIGIN || '').split(',');
 function corsOptionsDelegate(req, callback) {
   let corsOptions;
   if (allowlist.indexOf(req.header('Origin')) !== -1) {
