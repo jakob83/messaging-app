@@ -39,6 +39,7 @@ model Message {
   senderId   String
   receiver   User     @relation("MessagesReceived", fields: [receiverId], references: [id])
   receiverId String
+  isRead     Boolean  @default(false)
 
   @@map("messages")
 }

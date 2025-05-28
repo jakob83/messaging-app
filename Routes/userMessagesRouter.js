@@ -70,7 +70,6 @@ userMessagesRouter.post(
   async (req, res) => {
     const { userId } = req.params;
     const user = req.user;
-    console.log(user);
     const { receiverId, content } = req.body;
     if (user.id !== userId) {
       return res.status(403).json({ error: 'cannot access this data' });
@@ -84,6 +83,33 @@ userMessagesRouter.post(
         },
       });
       return res.json(message);
+    } catch (error) {
+      return res.status(500).json({ error: 'Internal Server Error' });
+    }
+  }
+);
+
+userMessagesRouter.put(
+  '/',
+  passport.authenticate('jwt', { session: false }),
+  async (req, res) => {
+    const { userId } = req.params;
+    const { senderId, isRead } = req.body;
+    const user = req.user;
+    if (user.id !== userId) {
+      return res.status(403).json({ error: 'cannot access this data' });
+    }
+    try {
+      const updatedMessages = await prisma.message.updateMany({
+        where: {
+          senderId: senderId,
+          receiverId: userId,
+        },
+        data: {
+          isRead,
+        },
+      });
+      res.json(updatedMessages);
     } catch (error) {
       return res.status(500).json({ error: 'Internal Server Error' });
     }

@@ -134,7 +134,8 @@ exports.Prisma.MessageScalarFieldEnum = {
   sendAt: 'sendAt',
   content: 'content',
   senderId: 'senderId',
-  receiverId: 'receiverId'
+  receiverId: 'receiverId',
+  isRead: 'isRead'
 };
 
 exports.Prisma.FriendRequestScalarFieldEnum = {

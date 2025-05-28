@@ -2365,6 +2365,7 @@ export namespace Prisma {
     content: string | null
     senderId: string | null
     receiverId: string | null
+    isRead: boolean | null
   }
 
   export type MessageMaxAggregateOutputType = {
@@ -2373,6 +2374,7 @@ export namespace Prisma {
     content: string | null
     senderId: string | null
     receiverId: string | null
+    isRead: boolean | null
   }
 
   export type MessageCountAggregateOutputType = {
@@ -2381,6 +2383,7 @@ export namespace Prisma {
     content: number
     senderId: number
     receiverId: number
+    isRead: number
     _all: number
   }
 
@@ -2391,6 +2394,7 @@ export namespace Prisma {
     content?: true
     senderId?: true
     receiverId?: true
+    isRead?: true
   }
 
   export type MessageMaxAggregateInputType = {
@@ -2399,6 +2403,7 @@ export namespace Prisma {
     content?: true
     senderId?: true
     receiverId?: true
+    isRead?: true
   }
 
   export type MessageCountAggregateInputType = {
@@ -2407,6 +2412,7 @@ export namespace Prisma {
     content?: true
     senderId?: true
     receiverId?: true
+    isRead?: true
     _all?: true
   }
 
@@ -2488,6 +2494,7 @@ export namespace Prisma {
     content: string
     senderId: string
     receiverId: string
+    isRead: boolean
     _count: MessageCountAggregateOutputType | null
     _min: MessageMinAggregateOutputType | null
     _max: MessageMaxAggregateOutputType | null
@@ -2513,6 +2520,7 @@ export namespace Prisma {
     content?: boolean
     senderId?: boolean
     receiverId?: boolean
+    isRead?: boolean
     sender?: boolean | UserDefaultArgs<ExtArgs>
     receiver?: boolean | UserDefaultArgs<ExtArgs>
   }, ExtArgs["result"]["message"]>
@@ -2523,6 +2531,7 @@ export namespace Prisma {
     content?: boolean
     senderId?: boolean
     receiverId?: boolean
+    isRead?: boolean
     sender?: boolean | UserDefaultArgs<ExtArgs>
     receiver?: boolean | UserDefaultArgs<ExtArgs>
   }, ExtArgs["result"]["message"]>
@@ -2533,6 +2542,7 @@ export namespace Prisma {
     content?: boolean
     senderId?: boolean
     receiverId?: boolean
+    isRead?: boolean
     sender?: boolean | UserDefaultArgs<ExtArgs>
     receiver?: boolean | UserDefaultArgs<ExtArgs>
   }, ExtArgs["result"]["message"]>
@@ -2543,9 +2553,10 @@ export namespace Prisma {
     content?: boolean
     senderId?: boolean
     receiverId?: boolean
+    isRead?: boolean
   }
 
-  export type MessageOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "sendAt" | "content" | "senderId" | "receiverId", ExtArgs["result"]["message"]>
+  export type MessageOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "sendAt" | "content" | "senderId" | "receiverId" | "isRead", ExtArgs["result"]["message"]>
   export type MessageInclude<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     sender?: boolean | UserDefaultArgs<ExtArgs>
     receiver?: boolean | UserDefaultArgs<ExtArgs>
@@ -2571,6 +2582,7 @@ export namespace Prisma {
       content: string
       senderId: string
       receiverId: string
+      isRead: boolean
     }, ExtArgs["result"]["message"]>
     composites: {}
   }
@@ -3001,6 +3013,7 @@ export namespace Prisma {
     readonly content: FieldRef<"Message", 'String'>
     readonly senderId: FieldRef<"Message", 'String'>
     readonly receiverId: FieldRef<"Message", 'String'>
+    readonly isRead: FieldRef<"Message", 'Boolean'>
   }
     
 
@@ -4499,7 +4512,8 @@ export namespace Prisma {
     sendAt: 'sendAt',
     content: 'content',
     senderId: 'senderId',
-    receiverId: 'receiverId'
+    receiverId: 'receiverId',
+    isRead: 'isRead'
   };
 
   export type MessageScalarFieldEnum = (typeof MessageScalarFieldEnum)[keyof typeof MessageScalarFieldEnum]
@@ -4561,6 +4575,13 @@ export namespace Prisma {
    * Reference to a field of type 'DateTime[]'
    */
   export type ListDateTimeFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'DateTime[]'>
+    
+
+
+  /**
+   * Reference to a field of type 'Boolean'
+   */
+  export type BooleanFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'Boolean'>
     
 
 
@@ -4665,6 +4686,7 @@ export namespace Prisma {
     content?: StringFilter<"Message"> | string
     senderId?: StringFilter<"Message"> | string
     receiverId?: StringFilter<"Message"> | string
+    isRead?: BoolFilter<"Message"> | boolean
     sender?: XOR<UserScalarRelationFilter, UserWhereInput>
     receiver?: XOR<UserScalarRelationFilter, UserWhereInput>
   }
@@ -4675,6 +4697,7 @@ export namespace Prisma {
     content?: SortOrder
     senderId?: SortOrder
     receiverId?: SortOrder
+    isRead?: SortOrder
     sender?: UserOrderByWithRelationInput
     receiver?: UserOrderByWithRelationInput
   }
@@ -4688,6 +4711,7 @@ export namespace Prisma {
     content?: StringFilter<"Message"> | string
     senderId?: StringFilter<"Message"> | string
     receiverId?: StringFilter<"Message"> | string
+    isRead?: BoolFilter<"Message"> | boolean
     sender?: XOR<UserScalarRelationFilter, UserWhereInput>
     receiver?: XOR<UserScalarRelationFilter, UserWhereInput>
   }, "id">
@@ -4698,6 +4722,7 @@ export namespace Prisma {
     content?: SortOrder
     senderId?: SortOrder
     receiverId?: SortOrder
+    isRead?: SortOrder
     _count?: MessageCountOrderByAggregateInput
     _max?: MessageMaxOrderByAggregateInput
     _min?: MessageMinOrderByAggregateInput
@@ -4712,6 +4737,7 @@ export namespace Prisma {
     content?: StringWithAggregatesFilter<"Message"> | string
     senderId?: StringWithAggregatesFilter<"Message"> | string
     receiverId?: StringWithAggregatesFilter<"Message"> | string
+    isRead?: BoolWithAggregatesFilter<"Message"> | boolean
   }
 
   export type FriendRequestWhereInput = {
@@ -4859,6 +4885,7 @@ export namespace Prisma {
     id?: string
     sendAt?: Date | string
     content: string
+    isRead?: boolean
     sender: UserCreateNestedOneWithoutMessagesSentInput
     receiver: UserCreateNestedOneWithoutMessagesReceivedInput
   }
@@ -4869,12 +4896,14 @@ export namespace Prisma {
     content: string
     senderId: string
     receiverId: string
+    isRead?: boolean
   }
 
   export type MessageUpdateInput = {
     id?: StringFieldUpdateOperationsInput | string
     sendAt?: DateTimeFieldUpdateOperationsInput | Date | string
     content?: StringFieldUpdateOperationsInput | string
+    isRead?: BoolFieldUpdateOperationsInput | boolean
     sender?: UserUpdateOneRequiredWithoutMessagesSentNestedInput
     receiver?: UserUpdateOneRequiredWithoutMessagesReceivedNestedInput
   }
@@ -4885,6 +4914,7 @@ export namespace Prisma {
     content?: StringFieldUpdateOperationsInput | string
     senderId?: StringFieldUpdateOperationsInput | string
     receiverId?: StringFieldUpdateOperationsInput | string
+    isRead?: BoolFieldUpdateOperationsInput | boolean
   }
 
   export type MessageCreateManyInput = {
@@ -4893,12 +4923,14 @@ export namespace Prisma {
     content: string
     senderId: string
     receiverId: string
+    isRead?: boolean
   }
 
   export type MessageUpdateManyMutationInput = {
     id?: StringFieldUpdateOperationsInput | string
     sendAt?: DateTimeFieldUpdateOperationsInput | Date | string
     content?: StringFieldUpdateOperationsInput | string
+    isRead?: BoolFieldUpdateOperationsInput | boolean
   }
 
   export type MessageUncheckedUpdateManyInput = {
@@ -4907,6 +4939,7 @@ export namespace Prisma {
     content?: StringFieldUpdateOperationsInput | string
     senderId?: StringFieldUpdateOperationsInput | string
     receiverId?: StringFieldUpdateOperationsInput | string
+    isRead?: BoolFieldUpdateOperationsInput | boolean
   }
 
   export type FriendRequestCreateInput = {
@@ -5071,6 +5104,11 @@ export namespace Prisma {
     _max?: NestedDateTimeFilter<$PrismaModel>
   }
 
+  export type BoolFilter<$PrismaModel = never> = {
+    equals?: boolean | BooleanFieldRefInput<$PrismaModel>
+    not?: NestedBoolFilter<$PrismaModel> | boolean
+  }
+
   export type UserScalarRelationFilter = {
     is?: UserWhereInput
     isNot?: UserWhereInput
@@ -5082,6 +5120,7 @@ export namespace Prisma {
     content?: SortOrder
     senderId?: SortOrder
     receiverId?: SortOrder
+    isRead?: SortOrder
   }
 
   export type MessageMaxOrderByAggregateInput = {
@@ -5090,6 +5129,7 @@ export namespace Prisma {
     content?: SortOrder
     senderId?: SortOrder
     receiverId?: SortOrder
+    isRead?: SortOrder
   }
 
   export type MessageMinOrderByAggregateInput = {
@@ -5098,6 +5138,15 @@ export namespace Prisma {
     content?: SortOrder
     senderId?: SortOrder
     receiverId?: SortOrder
+    isRead?: SortOrder
+  }
+
+  export type BoolWithAggregatesFilter<$PrismaModel = never> = {
+    equals?: boolean | BooleanFieldRefInput<$PrismaModel>
+    not?: NestedBoolWithAggregatesFilter<$PrismaModel> | boolean
+    _count?: NestedIntFilter<$PrismaModel>
+    _min?: NestedBoolFilter<$PrismaModel>
+    _max?: NestedBoolFilter<$PrismaModel>
   }
 
   export type FriendRequestReceiverIdSenderIdStateCompoundUniqueInput = {
@@ -5391,6 +5440,10 @@ export namespace Prisma {
     connect?: UserWhereUniqueInput
   }
 
+  export type BoolFieldUpdateOperationsInput = {
+    set?: boolean
+  }
+
   export type UserUpdateOneRequiredWithoutMessagesSentNestedInput = {
     create?: XOR<UserCreateWithoutMessagesSentInput, UserUncheckedCreateWithoutMessagesSentInput>
     connectOrCreate?: UserCreateOrConnectWithoutMessagesSentInput
@@ -5502,6 +5555,19 @@ export namespace Prisma {
     _max?: NestedDateTimeFilter<$PrismaModel>
   }
 
+  export type NestedBoolFilter<$PrismaModel = never> = {
+    equals?: boolean | BooleanFieldRefInput<$PrismaModel>
+    not?: NestedBoolFilter<$PrismaModel> | boolean
+  }
+
+  export type NestedBoolWithAggregatesFilter<$PrismaModel = never> = {
+    equals?: boolean | BooleanFieldRefInput<$PrismaModel>
+    not?: NestedBoolWithAggregatesFilter<$PrismaModel> | boolean
+    _count?: NestedIntFilter<$PrismaModel>
+    _min?: NestedBoolFilter<$PrismaModel>
+    _max?: NestedBoolFilter<$PrismaModel>
+  }
+
   export type UserCreateWithoutInContactsInput = {
     id?: string
     createdAt?: Date | string
@@ -5572,6 +5638,7 @@ export namespace Prisma {
     id?: string
     sendAt?: Date | string
     content: string
+    isRead?: boolean
     receiver: UserCreateNestedOneWithoutMessagesReceivedInput
   }
 
@@ -5580,6 +5647,7 @@ export namespace Prisma {
     sendAt?: Date | string
     content: string
     receiverId: string
+    isRead?: boolean
   }
 
   export type MessageCreateOrConnectWithoutSenderInput = {
@@ -5596,6 +5664,7 @@ export namespace Prisma {
     id?: string
     sendAt?: Date | string
     content: string
+    isRead?: boolean
     sender: UserCreateNestedOneWithoutMessagesSentInput
   }
 
@@ -5604,6 +5673,7 @@ export namespace Prisma {
     sendAt?: Date | string
     content: string
     senderId: string
+    isRead?: boolean
   }
 
   export type MessageCreateOrConnectWithoutReceiverInput = {
@@ -5729,6 +5799,7 @@ export namespace Prisma {
     content?: StringFilter<"Message"> | string
     senderId?: StringFilter<"Message"> | string
     receiverId?: StringFilter<"Message"> | string
+    isRead?: BoolFilter<"Message"> | boolean
   }
 
   export type MessageUpsertWithWhereUniqueWithoutReceiverInput = {
@@ -6082,6 +6153,7 @@ export namespace Prisma {
     sendAt?: Date | string
     content: string
     receiverId: string
+    isRead?: boolean
   }
 
   export type MessageCreateManyReceiverInput = {
@@ -6089,6 +6161,7 @@ export namespace Prisma {
     sendAt?: Date | string
     content: string
     senderId: string
+    isRead?: boolean
   }
 
   export type FriendRequestCreateManySenderInput = {
@@ -6181,6 +6254,7 @@ export namespace Prisma {
     id?: StringFieldUpdateOperationsInput | string
     sendAt?: DateTimeFieldUpdateOperationsInput | Date | string
     content?: StringFieldUpdateOperationsInput | string
+    isRead?: BoolFieldUpdateOperationsInput | boolean
     receiver?: UserUpdateOneRequiredWithoutMessagesReceivedNestedInput
   }
 
@@ -6189,6 +6263,7 @@ export namespace Prisma {
     sendAt?: DateTimeFieldUpdateOperationsInput | Date | string
     content?: StringFieldUpdateOperationsInput | string
     receiverId?: StringFieldUpdateOperationsInput | string
+    isRead?: BoolFieldUpdateOperationsInput | boolean
   }
 
   export type MessageUncheckedUpdateManyWithoutSenderInput = {
@@ -6196,12 +6271,14 @@ export namespace Prisma {
     sendAt?: DateTimeFieldUpdateOperationsInput | Date | string
     content?: StringFieldUpdateOperationsInput | string
     receiverId?: StringFieldUpdateOperationsInput | string
+    isRead?: BoolFieldUpdateOperationsInput | boolean
   }
 
   export type MessageUpdateWithoutReceiverInput = {
     id?: StringFieldUpdateOperationsInput | string
     sendAt?: DateTimeFieldUpdateOperationsInput | Date | string
     content?: StringFieldUpdateOperationsInput | string
+    isRead?: BoolFieldUpdateOperationsInput | boolean
     sender?: UserUpdateOneRequiredWithoutMessagesSentNestedInput
   }
 
@@ -6210,6 +6287,7 @@ export namespace Prisma {
     sendAt?: DateTimeFieldUpdateOperationsInput | Date | string
     content?: StringFieldUpdateOperationsInput | string
     senderId?: StringFieldUpdateOperationsInput | string
+    isRead?: BoolFieldUpdateOperationsInput | boolean
   }
 
   export type MessageUncheckedUpdateManyWithoutReceiverInput = {
@@ -6217,6 +6295,7 @@ export namespace Prisma {
     sendAt?: DateTimeFieldUpdateOperationsInput | Date | string
     content?: StringFieldUpdateOperationsInput | string
     senderId?: StringFieldUpdateOperationsInput | string
+    isRead?: BoolFieldUpdateOperationsInput | boolean
   }
 
   export type FriendRequestUpdateWithoutSenderInput = {
